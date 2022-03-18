@@ -11,12 +11,12 @@ library(BAMMtools)
 library(ggplot2)
 
 # Work directory Setup            #
-getwd()
-dd = c("c:/Rwork/")
-setwd(dd)
+#getwd()
+#dd = c("c:/Rwork/")
+#setwd(dd)
 getwd()
 
-mydata <- read.csv("c:/Rwork/PR02ListActivitiesbyProgramYearProject.csv", header = TRUE)
+mydata <- read.csv("PR02ListActivitiesbyProgramYearProject.csv", header = TRUE)
 
 mydata1 <- subset(mydata, IDIS.Activity.ID !=15079)
 
