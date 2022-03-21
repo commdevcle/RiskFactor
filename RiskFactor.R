@@ -9,6 +9,11 @@ library(BAMMtools)
 library(dplyr)
 library(ggplot2)
 
+install.packages("viridis")
+library(viridis)
+
+library(ggiraph)
+
 getwd()
 
 mydata <- read.csv("PR02ListActivitiesbyProgramYearandProject03182022.csv", header = TRUE)
@@ -241,6 +246,9 @@ mydata3.selected <- mydata3 %>%filter(deskSel ==1)
 
 write.csv(mydata3.selected, file="DesktopMonitoringList.csv", row.names = FALSE, na="")
 
+#---- update mydata 2 and mydata 3
+write.csv(mydata2, file="PR02MonitoringList1q2022.csv", row.names = FALSE, na="")
+write.csv(mydata3, file="PR02DeskMonitoringList1q2022.csv", row.names = FALSE, na="")
 
 # plot
 myplot <- ggplot (mydata2, aes(x=Award.Ratio, y=DrawRate))+

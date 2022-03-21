@@ -16,6 +16,7 @@ library(BAMMtools)
 library(dplyr)
 library(ggplot2)
 library(viridis)
+library(ggiraph)
 
 
 mydata <- read.csv("PR02ListActivitiesbyProgramYearandProject03182022.csv", header = TRUE)
@@ -202,6 +203,10 @@ mydata3.selected <- mydata3 %>%filter(deskSel ==1)
 
  write.csv(mydata3.selected, file="DesktopMonitoringList.csv", row.names = FALSE, na="")
 
+ #---- update mydata 2 and mydata 3
+write.csv(mydata2, file="PR02MonitoringList1q2022.csv", row.names = FALSE, na="")
+write.csv(mydata3, file="PR02DeskMonitoringList1q2022.csv", row.names = FALSE, na="")
+
 
 # plot
 myplot1 <- ggplot (mydata2, aes(x=Award.Ratio, y=DrawRate))+
@@ -250,22 +255,52 @@ myplot4 <- ggplot (mydata3.selected, aes(x=Award.Ratio, y=DrawRate))+
 
 ```
 
+## Field Monitoring List for 1 Q 2022
 
+``` {r monitoringlist-table, echo= FALSE}
 
-``` {r tablehere, echo = FALSE}
+monitoringlist
 
-table (mydata2$Award.Ratio.cat)
-
-hist(mydata2$Award.Ratio.cat)
 
 ```
 
+## Desktop Monitoring List for 1 Q 2022
+
+``` {r desktopmonitoringlist-table, echo= FALSE}
+
+deskmonitoringlist
 
 
+```
 
+## Field Monitoring Project 
 
 ``` {r myplot1here, echo = FALSE}
 
-myplot1 + myplot2
+myplot1
+
+````
+
+## Desktop Monitoring Project 
+
+``` {r myplot2here, echo = FALSE}
+
+myplot2
+
+````
+
+## Field Monitoring Project Risk Factor 
+
+``` {r myplot3here, echo = FALSE}
+
+myplot3
+
+````
+
+## desktop Monitoring Project Risk Factor
+
+``` {r myplot4here, echo = FALSE}
+
+myplot4
 
 ````

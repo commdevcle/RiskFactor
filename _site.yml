@@ -6,7 +6,7 @@ navbar:
     - text: "Home"
       href: index.html
     - text: "Risk Factor"
-      href: RiskDactor.html
+      href: RiskFactor.html
     - text: "About"
       href: about.html
     
