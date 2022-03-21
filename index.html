@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Monitoring Policy</title>
+
+<script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Monitoring Policy - Compliance Team, Community Development Dept.</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="RiskFactor.html">Risk Factor</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="mailto:&lt;chong@clevelandohio.gov&gt;">
+    <span class="fa fa-envelope fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Monitoring Policy</h1>
+
+</div>
+
+
+<div id="introduction" class="section level2">
+<h2>11.01.00 Introduction</h2>
+<p>The City of Cleveland’s responsibilities for the day-to-day
+management of entitlement program funding are outline in federal and
+state regulations, City of Cleveland Code of Ordinances, HUD Memorandums
+and this Department Manual. In total, these require that entitlement
+funds be used only for eligible activities and expenses. While the City
+of Cleveland delegates some responsibility to subrecipients for
+day-to-day implementation of federally funded programs, the City of
+Cleveland’s Department of Community Development is responsible to HUD
+that all program funds and activities meet federal, state and local
+rules, regulations, statutes and guideline requirements.</p>
+<p>The Department must ensure grantees comply with all regulations
+governing administrative, financial and programmatic operations, and
+achieve performance objectives on time and within budget. Monitoring
+allows the Department to verify compliance with both regulatory and
+performance requirements.</p>
+<p>The Department of Community Development identifies training needs by
+analyzing monitoring data. To increase subrecipient management capacity
+and provide relevant technical assistance, training will be targeted to
+address the most common challenges revealed in monitorings.</p>
+<p>This chapter summarizes the process of program monitoring. It also
+gives subrecipients an outline to better understand the program and its
+objectives, and offer methods to improve program implementation.</p>
+</div>
+<div id="overview" class="section level2">
+<h2>11.02.00 Overview</h2>
+<p>HUD describes monitoring should assess the quality of performance
+over time and ensure that findings of audits and other reviews are
+promptly resolved.</p>
+<p>Through monitoring, the Department of Community Development assesses
+a subrecipient’s program compliance and performance over time.
+Monitoring provides critical statistical information for making informed
+judgments about subrecipients’ management efficiency and program
+effectiveness. Monitoring is also helpful in identifying fraud, waste
+and abuse.</p>
+<p>The Department of Community Development acknowledges its
+responsibilities to HUD to ensure all Entitlement funds are used in
+accordance with federal regulations. It is the Department’s goal to help
+subrecipients comply with these federal regulations, as well as all
+state statutes, local ordinances and requirements, and to help resolve
+problems in the implementation of their program activities.</p>
+<p>Monitoring is the primary tool that the Department of Community
+Development uses to ensure this compliance. Monitoring is also an
+opportunity to provide focused, specific technical assistance and
+guidance based on evaluation of a subrecipient’s processes and
+practices. Whenever possible, deficiencies will be rectified through
+discussion, negotiation and technical assistance.</p>
+<p>All programs and activities that funded through federal entitlement
+funds (including CDBG, HOME, ESG, HOPWA, NSP, ARRA, any HUD-funded
+disaster relief initiatives and other HUD-funded programs) will be
+monitored by the appropriate Department of Community Development
+staff.</p>
+<p>The Department of Community Development uses monitoring to accomplish
+the following objectives: • Ensure all federal funded activities and
+projects are carried out effectively, efficiently and in compliance with
+applicable laws, regulations and requirements. • Provide technical
+assistance and information to subrecipients to improve performance,
+develop and increase capacity, and augment management and technical
+skills. • Assure that subrecipients with management responsibilities are
+performing monitoring(s) based on regular risk assessments, and taking
+appropriate steps to improve compliance and reduce risks identified by
+those risk assessments and monitorings. • Assure that compliance roles
+and responsibilities are clearly established across the subrecipients
+systems and that care is given to delegating substantial authority. •
+Assure that subrecipients implement standards of conduct, have written
+policies and procedures and internal controls capable of ensuring
+compliance and reducing possible ethics concerns with their
+organizations. • Assure that individuals responsible for program
+compliance and ethics have adequate resources, authority and
+competencies to carry out their responsibilities. • Assure that the
+subrecipients compliance standards, procedures and expectations are
+effectively communicated to employees through education and training
+programs, publications and other appropriate means. • Assure that
+reasonable steps have been taken to achieve compliance throughout the
+subrecipient’s organization through auditing and monitoring systems, as
+well as periodic evaluations of program compliance. • Assure that
+subrecipients maintain an effective mechanism for employees and agents
+to report or seek guidance regarding potential or actual wrongdoing,
+including mechanisms for anonymous reporting and appropriate safeguards
+against retaliation. • Report on effectiveness of compliance to the
+appropriate Department of Community Development staff. • Take other
+actions, or make other recommendations, as necessary to promote an
+ethical organization culture.</p>
+</div>
+<div id="monitoring-procedure-for-field-monitorings"
+class="section level2">
+<h2>11.03.00 Monitoring Procedure for Field Monitorings</h2>
+<p>The monitoring visit should be viewed as an opportunity to build a
+sense of partnership and increase the subrecipient’s capacity to deliver
+services to the residents, businesses and other interested parties in
+Cleveland. Monitorings are opportunities for communications and problem
+solving technical assistance between the City of Cleveland Department of
+Community Development and its subrecipients.</p>
+<div id="written-notification-of-monitoring-visit"
+class="section level3">
+<h3>11.03.01 Written Notification of Monitoring Visit</h3>
+<p>The appropriate City of Cleveland Department of Community Development
+staff member (Monitor) will contact the grantee prior to the monitoring
+to advise them of the upcoming visit and present the date and times
+tentatively scheduled. Prior to the agreed monitoring dates, the Monitor
+will send written notification, email or letter, notifying the
+subrecipient of the monitoring. Included in the written notification
+will be a summary of the program areas to be reviewed at the monitoring
+and a copy of the review checklists that will be used to perform the
+monitoring. This summary provides the subrecipient an opportunity to
+review their files prior to the visit to ensure that complete records
+will be available, as required.</p>
+</div>
+<div id="entrance-conference" class="section level3">
+<h3>11.03.02 Entrance Conference</h3>
+<p>The monitoring visit will begin with the Monitor conducting an
+entrance conference. The meeting should include the subrecipient’s
+authorized representative (person that signed contract/agreement),
+program staff, fiscal staff and other interested parties that the
+Monitor may want included. The Monitor will briefly outline the purpose
+of the visit, discuss the activities to be monitored, explain the
+process of review, and identify the possible outcomes. The Monitor will
+ask the subrecipient to identify contact staff for each activity and/or
+general support functions, such as the location of copiers, access
+hours, etc.</p>
+</div>
+<div id="monitoring-activities" class="section level3">
+<h3>11.03.03 Monitoring Activities</h3>
+<p>At a minimum, the Monitor will review the activity with the following
+City checklists: 1. Accomplishment Review; 2. Procurement; 3. Visual
+Program Monitoring; 4. Records and Public Information; and 5. If
+activity is HOME, ESG or HOPWA funded, a HUD Monitoring Checklist that
+is applicable to the Activity (e.g. HOME Homebuyer Downpayment
+Assistance Projects [Exhibit 7-28], ESG Emergency Shelter [Exhibit
+28-5], or HOPWA Housing Planning and Rent Subsidies [Exhibit 10-1]) The
+City Monitoring Checklists are a condensed version of HUD Monitoring
+Checklists that the Department of Community Development has repurposed
+to meet its needs for onsite monitoring. The Monitoring Checklists cover
+a variety of topics including, but not limited to:</p>
+<p>Area of Review/Regulations National Objective<br />
+24 CFR 570.208(a)(1) 24 CFR 570.208(a)(2) 24 CFR 570.208(a)(3) 24 CFR
+570.208(a)(4) 24 CFR 570.208(b)(1) 24 CFR 570.208(b)(2) 24 CFR
+570.208(c) Eligible Activities 24 CFR 570.201-205 Program Progress and
+Accomplishment Reporting<br />
+2 CFR Part 200.300-345 Procurement 2 CFR Part 200.317-326 Federal Single
+Audit<br />
+2 CFR Part 200.500-520 Sub-Recipient Agreements and Oversight<br />
+2 CFR Part 200.330-332 2 CFR Part 570.503 Sub-Contractor Agreements and
+Oversight 2 CFR Part 200.317-326 Records 24 CFR Part 570.506 Public
+Information<br />
+24 CFR Part 570.508 Fair Housing<br />
+24 CFR Part 5.150-168 Equal Opportunity<br />
+24 CFR Part 570.607 Section 3 Hiring and Outreach<br />
+24 CFR Part 570.607 Minority-Owned/Women-Owned Businesses<br />
+24 CFR Part 570.607 Homebuyer Programs<br />
+24 CFR Part 570.201(n) Rehabilitation Programs 24 CFR Part
+570.202(a)-(f) 24 CFR Part 570.202(a)-(f) Economic Development Financial
+Assistance<br />
+24 CFR Part 570.201(o) 24 CFR Part 5570.203 24 CFR Part 5570.201(o) 24
+CFR Part 570.203 Micro-Enterprise Technical and Financial Assistance 24
+CFR Part 570.201(o) 24 CFR Part 5570.201(p) 24 CFR Part 570.203 24 CFR
+Part 570.201(o) 24 CFR Part 570.201(p) 24 CFR Part 570.203 Public
+Services 24 CFR Part 570.201(e) Planning<br />
+24 CFR Part 570.205 Code Enforcement 24 CFR Part 570.202(c) Acquisition
+of Property 24 CFR Part 570.201(a) Disposition 24 CFR Part 570.201(c)
+Clearance, Demolition<br />
+24 CFR Part 570.201(d) Construction of New Housing 24 CFR Part
+570.201(m)</p>
+<p>Additional topics specifically related to HOME, ESG and HOPWA
+compliance are assessed through the Department of Community
+Development’s use of the HUD Monitoring Checklists relative to each
+activity’s programming and funding source.</p>
+<p>The grantee is required to have all records, files and documentation
+available for review during the visit. If the subrecipient engages other
+public, agencies, operators or consultants for program implementation,
+all records must be available at the subrecipient’s office during the
+visit. Failure to have all records readily accessible will result in an
+“unresolvable” monitoring finding.</p>
+</div>
+<div id="exit-conference" class="section level3">
+<h3>11.03.04 Exit Conference</h3>
+<p>The visit is concluded with an exit conference. Responsible
+officials, such as the person who signed the contract/agreement, as
+well, as program staff are expected to attend. The Monitor(s) will
+identify issues revealed in the monitoring. Monitors will provide
+details of the issues identified, explain the impacts of the practices
+and provide the associated regulation(s). As with all phases of
+monitoring, the information provided in the exit conference is technical
+assistance and designed to build capacity and ensure program
+compliance.</p>
+<p>Issues will not be categorized as a “finding”, “concern” or
+“information” during the exit conference. The final monitoring category
+and necessary actions will be transmitted to the subrecipient via a
+formal Monitoring Report.</p>
+</div>
+<div id="monitoring-report" class="section level3">
+<h3>11.03.05 Monitoring Report</h3>
+<p>After the visit, the Monitor will meet with the Compliance Manager
+and draft a rough version of the Monitoring Report to identify each
+issue as either a Finding or a Concern. The Compliance Manager will then
+review the draft Monitoring Report, finalize, and refer the Findings and
+Concerns to the applicable Commissioner for corrective action
+determinations. The Department of Community Development prefers that
+program deficiencies be rectified through constructive discussion,
+negotiation and technical assistance. The Monitoring Report will reflect
+technical assistance provided on-site during the visit and corrective
+actions will be structured to reinforce capacity building.</p>
+<p>A “Finding” is an action, or lack of action, in direct violation of a
+statutory requirement, regulation or City policy.</p>
+<p>A “Concern” is an action or action(s) that could result in a Finding
+if not corrected.</p>
+<p>Both Findings and Concerns require corrective actions to be submitted
+to the Department of Community Development for review and approval. A
+Finding may result in the repayment of award funds if the problem is an
+ineligible activity or project.</p>
+<p>“Information” will be provided as technical assistance to strengthen
+the subrecipients program management capacity and usually does not
+require corrective action.</p>
+<p>Within 30 days of the visit, the subrecipient will receive formal
+notification, either through email or letter, of the monitoring results.
+The subrecipient will be advised to respond in writing about steps
+and/or actions taken to resolve the “Findings” and “Concerns”. In rare
+cases, depending on the severity of the issues, a follow-up visit may be
+necessary.</p>
+</div>
+<div id="post-monitoring" class="section level3">
+<h3>11.03.06 Post Monitoring</h3>
+<p>Upon receipt of the required response and corrective actions by
+subrecipient, the Monitor will review all items for compliance. If
+necessary, the Monitor will contact the subrecipient for revisions or
+clarification. Once all items have been satisfactorily addressed the
+Monitor will draft and issue a Clearance Letter to the subrecipient, via
+email or letter.</p>
+</div>
+</div>
+<div id="actions" class="section level2">
+<h2>11.04.00 Actions</h2>
+<p>The City of Cleveland Department of Community Development, as a HUD
+grantee, must prevent the continuation of program deficiencies
+identified; mitigate, to the extent possible, the adverse effects or
+consequence of deficiencies identified; and/or prevent a recurrence of
+deficiencies identified.</p>
+<p>If the subrecipient is uncooperative, does not comply with the
+monitoring report requirements or does not act to clear the findings and
+concerns, Department of Community Development will consider this a
+violation of the Contract/Agreement between the City of Cleveland and
+the subrecipient.</p>
+<p>Department of Community Development actions may include, but are not
+limited to: • Issue a letter of warning that additional action(s) will
+be taken if deficiencies are not corrected or are repeated. • Advise the
+subrecipient that additional information or assurances will be required
+before acceptance of one or more certifications required in future
+applications for funds. • Advise the grantee that future funding
+applications will be assessed negative points during rating and ranking
+due to non-compliance with monitoring clearances. • Suspend or terminate
+the expenditure of funds for a deficient activity or grant. • Refrain
+from extending any further assistance to the recipient until the grantee
+is in full compliance.</p>
+</div>
+<div id="desktop-monitoring" class="section level2">
+<h2>11.05.00 Desktop Monitoring</h2>
+<p>In addition to field monitorings, the Department has also enacted a
+process to perform remote desktop monitorings. The shortened nature of
+the desktop monitoring process allows the Department the ability to
+conduct them on the same quarterly schedule as the field monitorings,
+but in a higher frequency. The Department estimates the number of
+desktop monitorings to be twenty-five (25) annually or approximately
+seven (7) per quarter.</p>
+<p>Desktop monitorings are selected using the same criteria as field
+monitorings, however agencies that the Department has field monitored
+within the past three (3) years are not excluded from the selection
+process. Once selected, the Compliance and MIS staff assign the desktop
+monitorings to monitoring staff in the same fashion as field
+monitorings.</p>
+<p>Desktop Monitors are not required to notify the agency of a desktop
+monitoring. They are only required to monitor an agency using the
+Accomplishment Review monitoring sheet, and to perform a rudimentary
+performance assessment by looking at the drawdown completion to-date for
+the activity. Once completed, the desktop monitor must articulate their
+findings in a report and decide if further monitoring is required.</p>
+<p>If the desktop monitor requires further monitoring, he or she must
+communicate their report and findings to the Agency. The desktop monitor
+must allow the agency a thirty (30) day window to show satisfactory
+evidence that it has complied with the desktop monitor’s findings. If
+the Agency complies, the desktop monitor must issue a notice to the
+Agency that reflects their compliance. If the Agency does not comply
+with the desktop monitor’s findings, the desktop monitor must move
+forward by performing a full field monitoring for the activity.</p>
+</div>
+<div id="selection-criteria-for-monitor-projects-and-programs"
+class="section level2">
+<h2>11.05.00 Selection Criteria for Monitor Projects and Programs</h2>
+<p>The City of Cleveland Department of Community Development has enacted
+a monitoring policy to ensure an annual monitoring of approximately
+15-30% of its HUD funded activities. The Department of Community
+Development shall select 10 programs from its current year HUD 02 Report
+on a quarterly basis for monitoring.</p>
+<p>The Department of Community Development shall prioritize higher risk
+activities by performing a risk-based analysis before randomly selecting
+activities on a quarterly basis for monitoring. This risk-based analysis
+shall provide each activity a score that is a combination of the total
+funding allocated for the activity, and a percentage of the funds drawn
+down by the City for the activity, to date. The Department of Community
+Development shall give high risk-based scores to those activities with
+high funding and low drawn down percentages, and low risk-based scores
+to those activities with low funding and higher drawn down
+percentages.</p>
+<div id="risk-based-factor-methodology" class="section level3">
+<h3>11.05.01 Risk-Based Factor Methodology</h3>
+<p>An exact breakdown of the Department of Community Development’s
+Risk-Based factor scoring and methodology is as follows:</p>
+<p>Factor 1 – Awarded Amount: The Amount Awarded to an Activity. To
+begin the analysis, the Department of Community Development first
+determines the activity’s award amount in comparison to the median award
+amount for all activities in the PR-02.</p>
+<p>Awarded Risk Factor = Awarded Amount/Median Awarded Amount</p>
+<p>The activity is then assigned an award amount risk factor on a scale
+from 1 to 10 based on the formula referenced above.</p>
+<p>Awarded amount risk category Weights • Award Risk Factor &lt;= 25% 1
+• 25% &lt; Award Risk Factor &lt;= 50 % 2 • 50% &lt; Award Risk Factor
+&lt;= 75 % 3 • 75% &lt; Award Risk Factor &lt;= 100 % 4 • 100% &lt;
+Award Risk Factor &lt;= 150% 5 • 150% &lt; Award Risk Factor &lt;= 200%
+6 • 200% &lt; Award Risk Factor &lt;= 400% 7 • 400% &lt; Award Risk
+Factor &lt;= 600 % 8 • 600% &lt; Award Risk Factor &lt;= 800 % 9 • Award
+Risk Factor &gt; 800% 10</p>
+<p>Factor 2 – Performance Risk Factor: The Amount Drawn Down by the
+Activity to Date. The award amount risk factor is then combined with a
+performance risk factor, which is a ratio of the activity’s percent
+drawn down to date from its total award over the average drawn down
+percentage of all PR-02 activities.</p>
+<p>Performance Risk Factor = Ratio of Drawn Down of total Awarded
+Amount/Average drawn down rate of all activities on PR02 Report. From
+there the activity is assigned a Performance Risk Factor score based on
+the formula referenced above.</p>
+<p>PerformacePerformance risk catogorycategory Weights • 75%
+&lt;Performance Risk Factor &lt;= 100% 1 • 50% &lt;Performance Risk
+Factor &lt;= 75% 2 • 25% &lt;Performance Risk Factor &lt;= 50% 3 • 10%
+&lt;Performance Risk Factor &lt;= 25% 4 • Performance Risk Factor &lt;=
+10% 5</p>
+<p>Factor 3 – Three Year Exclusion Rule (Field Monitoring Only) The
+Department shall exclude agencies from field monitoring if the agency
+received filed monitoring within the past three years. Agencies that
+were field monitored within the past three years are still eligible for
+desk monitoring, which may or may not lead to further field
+monitoring.</p>
+<p>Final Risk Factor Score: The activity’s final Risk Factor score is
+created by combining both the Activity’s Award Amount and Performance
+Risk Factors. Finally, the Department of Community Development then
+re-organizes the activities in the PR-02 Report and divides all of the
+activities into the following three categories based on their Risk
+Factor scores: • Low Risk: 1-5 • Medium Risk: 6-10 • High Risk:
+11-15</p>
+<p>Monitoring Selection and Allocation: The Department of Community
+Development utilizes the activities’ Risk Factor scores to prioritize
+its 20 annual monitorings (4 by quarter) by dividing the activities
+among the three levels of risk classification. The Department of
+Community Development distributes 25% of its 20 annual monitorings to
+the low risk classification, 25% to the medium risk classification, and
+50% to the high-risk classification. This division allows the Department
+of Community Development to better leverage its time and provide a
+stronger monitoring focus on high-risk activities. The overall
+monitoring number of 40 is about 27% of the total projects in the PR02
+report.</p>
+<p>Each quarter the Compliance Manager shall pull a new Per-02 Report
+from IDIS and work with the GIS/MIS staff to create new risk factors
+scores and organize the activities by risk factors for classification.
+From there, the GIS/MIS staff shall use an algorithm to randomly select
+the requisite number of monitorings per each classification and provide
+the selected list to the Compliance Manager for staff assignment.</p>
+<p>As the quarters progress annually, the GIS/MIS team shall remove
+previously monitored activities from the eligible pool to avoid
+duplicating monitorings. Additionally, the GIS/MIS staff shall remove
+administrative activities from the monitoring pool. If the GIS/MIS
+algorithm selects an activity with several subactivities underneath it,
+the GIS/MIS and Compliance staff shall work together to make a random
+selection of subactivities from that list to monitor.</p>
+</div>
+<div id="monitor-selection" class="section level3">
+<h3>11.05.02 Monitor Selection</h3>
+<p>Once the GIS/MIS staff has selected the activities for monitoring,
+they will provide the Compliance Manager with the list of activities for
+the quarter. From there, the Compliance Manager shall identify the
+requisite staff to perform the monitorings.</p>
+<p>The following positions shall be responsible for the monitoring of
+each activity by program: City Wide, Social Service and NDA Contract:
+Administration Contract Monitoring Specialists Community Development
+Corp.’s: Contract Administration Planners Emergency Solution Grants:
+Emergency Solution Grant Manager HOPWA Grants: Budget Manager
+Storefront: Storefront Manager Miscellaneous MOU’s: Budget Manager
+Housing and Development Office: HDO Project Manager Real Estate and
+Public Improvement: RE&amp;PI Project Manager Division of Neighborhood
+Services: Compliance Assistant Manager</p>
+<p>The designated monitor must deliver a Monitoring Letter with
+Findings, Concerns, and Information to the subrecipient within 60 days
+of being assigned the monitoring. Commissioners shall establish
+deadlines for corrective action and monitor follow up.</p>
+</div>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
