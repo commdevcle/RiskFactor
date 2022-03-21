@@ -214,12 +214,12 @@ The Department shall exclude agencies from field monitoring if the agency receiv
 
 Final Risk Factor Score:
 The activity’s final Risk Factor score is created by combining both the Activity’s Award Amount and Performance Risk Factors. Finally, the Department of Community Development then re-organizes the activities in the PR-02 Report and divides all of the activities into the following three categories based on their Risk Factor scores:
-•	Low Risk: 1-5
-•	Medium Risk: 6-10
-•	High Risk: 11-15	
+•	Low Risk:     1-5
+•	Medium Risk:  6-10
+•	High Risk:    11-15	
 
 Monitoring Selection and Allocation:
-The Department of Community Development utilizes the activities’ Risk Factor scores to prioritize its 40 annual monitorings by dividing the activities among the three levels of risk classification. The Department of Community Development distributes 10% of its 40 annual monitorings to the low risk classification, 40% to the medium risk classification, and 50% to the high-risk classification. This division allows the Department of Community Development to better leverage its time and provide a stronger monitoring focus on high-risk activities. The overall monitoring number of 40 is about 27% of the total projects in the 2020 PR02 report.
+The Department of Community Development utilizes the activities’ Risk Factor scores to prioritize its 20 annual monitorings (4 by quarter) by dividing the activities among the three levels of risk classification. The Department of Community Development distributes 25% of its 20 annual monitorings to the low risk classification, 25% to the medium risk classification, and 50% to the high-risk classification. This division allows the Department of Community Development to better leverage its time and provide a stronger monitoring focus on high-risk activities. The overall monitoring number of 40 is about 27% of the total projects in the PR02 report.
 
 Each quarter the Compliance Manager shall pull a new Per-02 Report from IDIS and work with the GIS/MIS staff to create new risk factors scores and organize the activities by risk factors for classification. From there, the GIS/MIS staff shall use an algorithm to randomly select the requisite number of monitorings per each classification and provide the selected list to the Compliance Manager for staff assignment. 
 
