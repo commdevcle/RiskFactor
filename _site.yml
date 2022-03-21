@@ -1,0 +1,20 @@
+name: "my-website"
+output_dir: "docs"
+navbar:
+  title: "Monitoring Policy - Compliance Team, Community Development Dept."
+  left:
+    - text: "Home"
+      href: index.html
+    - text: "Risk Factor"
+      href: RiskDactor.html
+    - text: "About"
+      href: about.html
+    
+      
+  right: 
+    - icon: fa-envelope fa-lg
+      href: mailto:<chong@clevelandohio.gov>
+
+output:
+  html_document:
+    theme: cosmo
